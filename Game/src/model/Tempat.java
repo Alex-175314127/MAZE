@@ -7,41 +7,75 @@ package model;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author user only
  */
 public class Tempat {
+
     private int tinggi; // tinggi tempat Game
     private int lebar;  // lebar tempat Game
     private ArrayList<Sel> daftarSel; // daftar sel
 
     private String isi; // isi file konfigurasi
-    
+
     public static int batasKanan;
     public static int batasBawah;
-    
+
     public Tempat() {
         daftarSel = new ArrayList<Sel>();
     }
-    
-    
-    
+
     /**
-     * Fungsi pembaca file konfigurasi.
-     * Hasil pembacaan file akan disimpan di atribut 'isi' dan juga di atribut daftarSel
-     * @param file 
+     * Fungsi pembaca file konfigurasi. Hasil pembacaan file akan disimpan di
+     * atribut 'isi' dan juga di atribut daftarSel
+     *
+     * @param file
      */
-    public void bacaKonfigurasi(File file){
-        
+    public void bacaKonfigurasi(File file) {
+        FileInputStream fis = null;
+        int data;
+        String hasil = "";
+        boolean isi = false;
+        int baris = 0;
+        int kolom = 0;
+        Tempat tmp = new Tempat();
+        try {
+            fis = new FileInputStream(file);
+            while ((data = fis.read()) != -1) {
+                hasil = hasil + (char) data;
+                if ((char) data != '\n') {
+                    if ((char) data != '\t') {
+                        Sel sel = new Sel(baris, kolom, (char) data);
+                        this.tambahSel(sel);
+                        kolom++;
+                    }
+                } else {
+                    kolom = 0;
+                    baris++;
+                }
+                this.setIsi(hasil);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Tempat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
     /**
      * Fungsi penambah daftar sel.
-     * @param sel 
+     *
+     * @param sel
      */
-    public void tambahSel(Sel sel){
+    public void tambahSel(Sel sel) {
         daftarSel.add(sel);
     }
 
