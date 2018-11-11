@@ -118,6 +118,11 @@ public class Tempat {
      * @param daftarSel the daftarSel to set
      */
     public void setDaftarSel(ArrayList<Sel> daftarSel) {
+        for (int i = 0; i < daftarSel.size(); i++) {
+            if (daftarSel.get(i) == null) {
+                
+            }
+        }
         this.daftarSel = daftarSel;
     }
 
