@@ -34,9 +34,9 @@ public class Map extends JFrame{
         for (int i = 0; i < peta.length ; i++) {
             for (int j = 0; j < peta[0].length; j++) {
                 Color warna;
-                if (peta[i] ==  peta[) {
-                    
-                }
+                if (peta[i].length == 1) {
+                    warna = Color.BLACK;
+                }else if(pe)
             }
         }
     }
