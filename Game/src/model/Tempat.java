@@ -6,6 +6,9 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,12 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 
 /**
  *
  * @author user only
  */
-public class Tempat {
+public class Tempat extends JPanel implements ActionListener{
 
     private int tinggi; // tinggi tempat Game
     private int lebar;  // lebar tempat Game
@@ -138,5 +142,15 @@ public class Tempat {
      */
     public void setIsi(String isi) {
         this.isi = isi;
+    }
+
+    public void Pint(Graphics g){
+        super.paint(g);
+        g.fillRect(45, 60, 32, 32);
+        g.setColor(Color.red);
+    }
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+      repaint();
     }
 }
