@@ -82,6 +82,12 @@ public class Tempat extends JPanel implements ActionListener{
     public void tambahSel(Sel sel) {
         daftarSel.add(sel);
     }
+    
+    public void hapusSel(){
+        if (!daftarSel.isEmpty()) {
+            daftarSel.remove(daftarSel.size() -1);
+        }
+    }
 
     /**
      * @return the tinggi

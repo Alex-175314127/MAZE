@@ -5,7 +5,6 @@
  */
 package view;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
 import javax.swing.JFrame;
@@ -36,26 +35,29 @@ public class TempatPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+g.drawRect(0, 0, Tempat.batasKanan, Tempat.batasBawah);
         // proses gambar daftar sel
         // asumsi sel berbentuk lingkaran
         // gambar lingkaran dengan fillOval dengan diameter 20
         if (tempat != null) {
             for (int i = 0; i < tempat.getDaftarSel().size(); i++) {
                 Sel sel = tempat.getDaftarSel().get(i);
-                if (sel.getNilai() == '@') {
-                    g.setColor(sel.getWarna());
-                    g.fillRect(sel.getPosisiX(),
-                            sel.getPosisiY(),
-                            sel.getLebar(),
-                            sel.getTinggi());
-                } else {
-                    g.setColor(sel.getWarna());
-                    g.fillOval(sel.getPosisiX(),
-                            sel.getPosisiY(),
-                            sel.getLebar(),
-                            sel.getTinggi());
-                }
+                g.setColor(sel.getWarna());
+                g.fillOval(sel.getPosisiX()*sel.getLebar(),
+                        sel.getPosisiY()*sel.getTinggi(),sel.getLebar(),sel.getTinggi());
+//                if (sel.getNilai() == '@') {
+//                    g.setColor(sel.getWarna());
+//                    g.fillRect(sel.getPosisiX(),
+//                            sel.getPosisiY(),
+//                            sel.getLebar(),
+//                            sel.getTinggi());
+//                } else {
+//                    g.setColor(sel.getWarna());
+//                    g.fillOval(sel.getPosisiX(),
+//                            sel.getPosisiY(),
+//                            sel.getLebar(),
+//                            sel.getTinggi());
+//                }
             }
         }
     }

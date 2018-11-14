@@ -12,10 +12,10 @@ import java.awt.Color;
  * @author user only
  */
 public class Sel {
-    private int posisiX; // nomor baris, dimulai dari nol (0)
-    private int posisiY; // nomor kolom, dimulai dari nol (0)
-    private int lebar;
-    private int tinggi;
+    private int kolom=0; // nomor baris, dimulai dari nol (0)
+    private int baris=0; // nomor kolom, dimulai dari nol (0)
+    private int lebar=25;
+    private int tinggi=25;
 
     private char nilai;
 
@@ -25,21 +25,21 @@ public class Sel {
     }
 
     public Sel(int posisiX, int posisiY, char nilai) {
-        this.posisiX = posisiX;
-        this.posisiY = posisiY;
+        this.kolom = posisiX;
+        this.baris = posisiY;
         this.nilai = nilai;
     }
 
     public Sel(int posisiX, int posisiY, char nilai, Color warna) {
-        this.posisiX = posisiX;
-        this.posisiY = posisiY;
+        this.kolom = posisiX;
+        this.baris = posisiY;
         this.nilai = nilai;
         this.warna = warna;
     }
 
     public Sel(int posisiX, int posisiY, int lebar, int tinggi, char nilai, Color warna) {
-        this.posisiX = posisiX;
-        this.posisiY = posisiY;
+        this.kolom = posisiX;
+        this.baris = posisiY;
         this.lebar = lebar;
         this.tinggi = tinggi;
         this.nilai = nilai;
@@ -53,7 +53,7 @@ public class Sel {
      * @return
      */
     public boolean isBatasKiri() {
-        if (posisiX <= 0) {
+        if (kolom* lebar <= 0) {
             return true;
         } else {
             return false;
@@ -67,7 +67,7 @@ public class Sel {
      * @return
      */
     public boolean isBatasKanan() {
-        if (posisiX + lebar < Tempat.batasKanan) {
+        if (kolom * lebar + lebar < Tempat.batasKanan) {
             return false;
         } else {
             return true;
@@ -79,7 +79,17 @@ public class Sel {
      */
     public void geserKanan() {
         if (isBatasKanan() == false) {
-            posisiX = posisiX + lebar;
+            kolom ++;
+        }else{
+            kolom--;
+        }
+    }
+    
+    public void geserKiri(){
+        if (isBatasKiri() == false) {
+            kolom--;       
+        }else{
+            kolom++;
         }
     }
 
@@ -87,42 +97,68 @@ public class Sel {
      * Fungsi untuk mengecek sel ada di batas atas
      */
     public boolean isBatasAtas() {
-        return false;
+        if (baris * tinggi <= 0) {
+            return true;
+        }else{
+            return false;
+        }
+        
     }
 
     /**
      * Fungsi untuk mengecek sel ada di batas bawah
      */
     public boolean isBatasBawah() {
-        return false;
+        if (baris * tinggi+tinggi < Tempat.batasBawah) {
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
+    
+    public void geserAtas(){
+        if (isBatasAtas() == false) {
+            baris --;
+        }else{
+            baris ++;
+        }
+    }
+    
+    public void geserBawah(){
+        if (isBatasBawah() == false) {
+            baris ++;
+        }else{
+            baris--;
+        }
     }
 
     /**
      * @return the posisiX
      */
     public int getPosisiX() {
-        return posisiX;
+        return kolom;
     }
 
     /**
      * @param posisiX the posisiX to set
      */
     public void setPosisiX(int posisiX) {
-        this.posisiX = posisiX;
+        this.kolom = posisiX;
     }
 
     /**
      * @return the posisiY
      */
     public int getPosisiY() {
-        return posisiY;
+        return baris;
     }
 
     /**
      * @param posisiY the posisiY to set
      */
     public void setPosisiY(int posisiY) {
-        this.posisiY = posisiY;
+        this.baris = posisiY;
     }
 
     /**
