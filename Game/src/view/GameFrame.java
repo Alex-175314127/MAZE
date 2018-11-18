@@ -40,6 +40,9 @@ public class GameFrame extends JFrame {
     private JButton atas;
     private JButton bawah;
     private JButton kananBawah;
+    private JButton kananAtas;
+    private JButton kiriBawah;
+    private JButton kiriAtas;
     
     private JMenuBar menuBar;
     private JMenu gameMenu;
@@ -59,7 +62,7 @@ public class GameFrame extends JFrame {
     
     public void init() {
         // set ukuran dan layout
-        this.setSize(1100, 500);
+        this.setSize(1500, 850);
         this.setLayout(new BorderLayout());
 
         // set menu Bar
@@ -167,6 +170,32 @@ public class GameFrame extends JFrame {
                 KananBawah();
             }
         });
+        this.kananAtas = new JButton("Kanan Atas");
+        southPanel.add(kananAtas);
+        kananAtas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                KananAtas();
+            }
+        });
+        this.kiriBawah = new JButton("Kiri Bawah");
+        southPanel.add(kiriBawah);
+        kiriBawah.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                KiriBawah();
+            }
+        });
+        
+        this.kiriAtas = new JButton("Kiri Atas");
+        southPanel.add(kiriAtas);
+        kiriAtas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                KiriAtas();
+            }
+        });
+              
     }
 
     /**
@@ -230,6 +259,28 @@ public class GameFrame extends JFrame {
     private void KananBawah(){
         for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
             getTempatPanel().getTempat().getDaftarSel().get(i).geserKanan();
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserBawah();
+        }
+        getTempatPanel().repaint();
+    }
+    
+    private void KananAtas(){
+        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserKanan();
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserAtas();
+        }
+        getTempatPanel().repaint();
+    }
+    private void KiriAtas(){
+        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserKiri();
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserAtas();
+        }
+        getTempatPanel().repaint();
+    }
+    private void KiriBawah(){
+        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserKiri();
             getTempatPanel().getTempat().getDaftarSel().get(i).geserBawah();
         }
         getTempatPanel().repaint();
