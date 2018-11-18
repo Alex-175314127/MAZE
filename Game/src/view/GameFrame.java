@@ -39,6 +39,7 @@ public class GameFrame extends JFrame {
     private JButton hapus;
     private JButton atas;
     private JButton bawah;
+    private JButton kananBawah;
     
     private JMenuBar menuBar;
     private JMenu gameMenu;
@@ -157,6 +158,15 @@ public class GameFrame extends JFrame {
                 keBawah();
             }
         });
+        
+        this.kananBawah = new JButton("Kanan Bawah");
+        southPanel.add(kananBawah);
+        kananBawah.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                KananBawah();
+            }
+        });
     }
 
     /**
@@ -195,21 +205,31 @@ public class GameFrame extends JFrame {
 
     private void TambahBola() {
         tempatPanel.getTempat().tambahSel(new Sel(0, 0, 25, 25, '#', Color.RED));
+        getTempatPanel().repaint();
     }
     
     private void HapusBola(){
         tempatPanel.getTempat().hapusSel();
+        getTempatPanel().repaint();
     }
     
     private void keAtas(){
-        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size() -1; i++) {
+        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
             getTempatPanel().getTempat().getDaftarSel().get(i).geserAtas();
         }
         getTempatPanel().repaint();
     }
     
     private void keBawah(){
-        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size()-1; i++) {
+        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserBawah();
+        }
+        getTempatPanel().repaint();
+    }
+    
+    private void KananBawah(){
+        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
+            getTempatPanel().getTempat().getDaftarSel().get(i).geserKanan();
             getTempatPanel().getTempat().getDaftarSel().get(i).geserBawah();
         }
         getTempatPanel().repaint();
