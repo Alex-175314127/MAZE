@@ -309,10 +309,11 @@ public class Peta extends JPanel {
 //    }
 
     public void isCompleted() {      
-        int jumlahBola = bola.size();//jumlah bola
+        int jumlahBola;//jumlah bola
+        jumlahBola = pemain.size();
         int goal = 0;
         for (int i = 0; i < bola.size(); i++) {
-            Bola bol = (Bola) bola.get(i);//ambil posisi bola
+            Pemain bol = (Pemain) bola.get(i);//ambil posisi bola
             for (int j = 0; j < gawang.size(); j++) {
                 Gawang gaw = (Gawang) gawang.get(j);//ambil posisi gawang
                 if (bol.getPosisiX() == gaw.getPosisiX() && bol.getPosisiY() == gaw.getPosisiY()) {//cek posisi bola sama dengan bola.

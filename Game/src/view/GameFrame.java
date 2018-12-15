@@ -11,8 +11,10 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Peta;
 import model.Sel;
 
 /**
@@ -43,7 +46,9 @@ public class GameFrame extends JFrame {
     private JButton kananAtas;
     private JButton kiriBawah;
     private JButton kiriAtas;
+    private JFileChooser pilih;
     
+    private JFrame panel;
     private JMenuBar menuBar;
     private JMenu gameMenu;
     private JMenuItem exitMenuItem;
@@ -75,6 +80,12 @@ public class GameFrame extends JFrame {
         menuBar.add(gameMenu);
         setJMenuBar(menuBar);      
 
+        bacaKonfigurasiMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                baca();
+            }
+        });
         //action perform for exitMenuItem
         exitMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -284,5 +295,23 @@ public class GameFrame extends JFrame {
             getTempatPanel().getTempat().getDaftarSel().get(i).geserBawah();
         }
         getTempatPanel().repaint();
+    }
+    private void baca(){
+        File file;
+        Peta peta;
+        int returnVal  = pilih.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION){ 
+         file = pilih.getSelectedFile();
+         peta = new Peta (file);
+         panel.add(peta);
+         peta.setSize(peta.getLebar(), peta.getTinggi());
+         
+         int lebar = panel.getWidth();
+         int tinggi = panel.getHeight();
+         
+         int x = (lebar - peta.getLebar()) / 2;
+         int y = (tinggi - peta.getTinggi()) / 2;
+         peta.setLocation(x, y);   
+            }
     }
 }

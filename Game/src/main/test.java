@@ -6,7 +6,7 @@
 package main;
 
 import javax.swing.JFrame;
-import model.Map;
+import model.Peta;
 import model.Tempat;
 
 /**

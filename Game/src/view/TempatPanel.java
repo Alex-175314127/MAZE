@@ -45,19 +45,7 @@ g.drawRect(0, 0, Tempat.batasKanan, Tempat.batasBawah);
                 g.setColor(sel.getWarna());
                 g.fillOval(sel.getPosisiX()*sel.getLebar(),
                         sel.getPosisiY()*sel.getTinggi(),sel.getLebar(),sel.getTinggi());
-//                if (sel.getNilai() == '@') {
-//                    g.setColor(sel.getWarna());
-//                    g.fillRect(sel.getPosisiX(),
-//                            sel.getPosisiY(),
-//                            sel.getLebar(),
-//                            sel.getTinggi());
-//                } else {
-//                    g.setColor(sel.getWarna());
-//                    g.fillOval(sel.getPosisiX(),
-//                            sel.getPosisiY(),
-//                            sel.getLebar(),
-//                            sel.getTinggi());
-//                }
+                
             }
         }
     }
