@@ -6,8 +6,12 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 
-public class Tembok extends Pixel {
-    
+public class Tembok extends Sel {
+    /**
+     * Constructor untuk menambahkan gambar agar tanda # berubah
+     * @param x
+     * @param y 
+     */
     public Tembok(int x, int y){
         super(x, y);
         URL location = this.getClass().getResource("tembok2.jpg");

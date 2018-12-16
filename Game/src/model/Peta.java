@@ -24,10 +24,21 @@ public final class Peta extends JPanel {
     private File Awal; // deklarasi atribut awal dengan tipe File dan bersifat private. 
     private final ArrayList Allperintah = new ArrayList(); // deklarasi atribut Allperintah mengunakan arraylist
 
+    /**
+     * method Peta untuk menujukan ke method bacaPeta
+     *
+     * @param file
+     */
     public Peta(File file) {
         this.bacaPeta(file);
     }
 
+    /**
+     * method ini berfungsi untuk membaca file map untuk di tampilan pada Frame
+     * di game
+     *
+     * @param file
+     */
     public void bacaPeta(File file) {
 
         try {
@@ -37,7 +48,7 @@ public final class Peta extends JPanel {
                 int x = 0;
                 int y = 0;
                 Tembok tmbk;
-              
+
                 Finish a;
                 int data;
                 while ((data = input.read()) != -1) { // untuk membaca inputan titik koordinat
@@ -47,7 +58,8 @@ public final class Peta extends JPanel {
                             y += jarak;
                             if (this.lebar < x) {
                                 this.lebar = x;
-                            }   x = 0;
+                            }
+                            x = 0;
                             break;
                         case '#':
                             tmbk = new Tembok(x, y);
@@ -79,6 +91,12 @@ public final class Peta extends JPanel {
         }
     }
 
+    /**
+     * method ini berfungsi untuk menampilkan gambar pada sel di frame game dan
+     * mengatur gambar sesuai konfigurasi di file map
+     *
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // buat hapus background
@@ -90,30 +108,47 @@ public final class Peta extends JPanel {
         map.add(pemain);
         for (int i = 0; i < map.size(); i++) {
             if (map.get(i) != null) {
-                Pixel item = (Pixel) map.get(i);
+                Sel item = (Sel) map.get(i);
                 g.drawImage(item.getImage(), item.getPosisiX(), item.getPosisiY(), this);// untuk buat gambarnya
             }
         }
     }
 
+    /**
+     * mengabil data dari variabel lebar
+     *
+     * @return
+     */
     public int getLebar() {
-        return this.lebar;
+        return lebar;
     }
 
+    /**
+     * megambil data dari Variable tinggi
+     *
+     * @return
+     */
     public int getTinggi() {
-        return this.tinggi;
+        return tinggi;
     }
 
+    /**
+     * method ini berfungsi untuk mengatur pergerakan pemain sesuai perintah
+     * yang di inputkan
+     *
+     * @param input
+     */
     public void GerakPemain(String input) {
         String in[] = input.split(" ");
         if (in.length > 2) {
-            JOptionPane.showMessageDialog(null, "Perintah harus berupa huruf [udlr], spasi dan diikuti langkah");
+            JOptionPane.showMessageDialog(null, "Perintah harus berupa huruf u ,d ,r ,l , "
+                    + "spasi dan diikuti langkah");
         } else if (in.length == 2) {
             if (in[0].matches("[udrlz]")) {
                 Allperintah.add(input);
                 if (in[0].equalsIgnoreCase("u")) {
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
-                        if (pemainNabrakTembok(pemain, "u")) {
+                        if (pemainTembok(pemain, "u")) {
                             return;
                         } else {
                             pemain.Gerak(0, -jarak);
@@ -121,37 +156,44 @@ public final class Peta extends JPanel {
                             //buat loopin untuk menggerakan player sebanyak yang di inputkan
                         }
                     }
-
+                    isCompleted();
+                    /**
+                     * untuk menerjemahkan input yang di masukan agar pemain
+                     * dapat bergerak
+                     */
                 } else if (in[0].equalsIgnoreCase("d")) {
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
-                        if (pemainNabrakTembok(pemain, "d")) {
+                        if (pemainTembok(pemain, "d")) {
                             return;
-                        }else {
+                        } else {
                             pemain.Gerak(0, jarak);
                             repaint();
                         }
 
                     }
+                    isCompleted();
                 } else if (in[0].equalsIgnoreCase("r")) {
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
-                        if (pemainNabrakTembok(pemain, "r")) {
+                        if (pemainTembok(pemain, "r")) {
                             return;
-                      
+
                         } else {
                             pemain.Gerak(jarak, 0);
                             repaint();
                         }
                     }
+                    isCompleted();
                 } else if (in[0].equalsIgnoreCase("l")) {
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
-                        if (pemainNabrakTembok(pemain, "l")) {
+                        if (pemainTembok(pemain, "l")) {
                             return;
-                        }else {
+                        } else {
                             pemain.Gerak(-jarak, 0);
                             repaint();
                         }
 
                     }
+                    isCompleted();
                 } else if (in[0].equalsIgnoreCase("z")) {
 
                 }
@@ -163,7 +205,15 @@ public final class Peta extends JPanel {
         }
     }
 
-    private boolean pemainNabrakTembok(Pixel pemain, String input) {
+    /**
+     * berfungsi untuk memenentukan posisi tembok agar pemain tidak dpat
+     * melewati tembok dan membuat player tidak bergerak jika ada tembok
+     *
+     * @param pemain
+     * @param input
+     * @return
+     */
+    private boolean pemainTembok(Sel pemain, String input) {
         boolean bantu = false;
         if (input.equalsIgnoreCase("l")) {
             for (int i = 0; i < tembok.size(); i++) {
@@ -173,7 +223,6 @@ public final class Peta extends JPanel {
                     break;
                 }
             }
-
         } else if (input.equalsIgnoreCase("r")) {
             for (int i = 0; i < tembok.size(); i++) {
                 Tembok wall = (Tembok) tembok.get(i);//Cek posisi Tembok
@@ -202,26 +251,37 @@ public final class Peta extends JPanel {
         return bantu;//default return false
     }
 
-    public void isCompleted() {   
-        int goal =0;
-        int s;
-        s = finish.size();
+    /**
+     * menampilakan pesan jika pemain selesai sampai di finish
+     */
+    public void isCompleted() {
+        int O = 0;
+        Pemain s = (Pemain) pemain;
+       
         for (int i = 0; i < finish.size(); i++) {
             Finish f = (Finish) finish.get(i);
-            if (pemain.getPosisiX() == f.getPosisiX()-1 && pemain.getPosisiY() == f.getPosisiY()-1) {
-                goal += 1;
-            }
-            if (goal == s) {
+            if (pemain.getPosisiX() == f.getPosisiX() && pemain.getPosisiY() == f.getPosisiY()) {
+                O += 1;
+            } if (O == finish.size()) {
                 JOptionPane.showMessageDialog(null, "Selesai");
             }
         }
     }
 
+    /**
+     * berfungsi mengambil data dari perintah-perintah yang di inputkan
+     *
+     * @return
+     */
     public String getTeksPerintah() {
         return Integer.toString(Allperintah.size());
         //untuk GET Perintah dari teks yang di input
     }
 
+    /**
+     * befungsi untuk restar game dan mengembalikan semua komponen ke posisi
+     * semula
+     */
     public void restartLevel() {
         Allperintah.clear();//restart jejak perintah
         finish.clear();//menngembalikan pemain ke posisi semula

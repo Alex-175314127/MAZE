@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.net.URL;
 import javax.swing.ImageIcon;
 
-public class Pemain extends Pixel {
+public class Pemain extends Sel {
     
      public Pemain(int x, int y) {
         super(x, y);
@@ -20,6 +20,6 @@ public class Pemain extends Pixel {
 }
 
     int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Failed");
     }
 }
