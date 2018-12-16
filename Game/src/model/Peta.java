@@ -13,17 +13,16 @@ import javax.swing.JPanel;
 
 public final class Peta extends JPanel {
 
-    private final ArrayList tembok = new ArrayList();
-    private final ArrayList bola = new ArrayList();
-    private final ArrayList finish = new ArrayList();
-    private final ArrayList map = new ArrayList();
-    private Pemain pemain;
-    private int lebar = 0;
-    private int tinggi = 0;
-    private final int jarak = 20;
-    private final String temp = "";
-    private File Awal;
-    private final ArrayList Allperintah = new ArrayList();
+    private final ArrayList tembok = new ArrayList();// deklarasi atribut tembok menngunakan arraylist
+    private final ArrayList finish = new ArrayList();// deklarasi attribut finish menggunakan arraylist
+    private final ArrayList map = new ArrayList(); // deklarasi atrribut map menggunakan arraylist
+    private Pemain pemain; // deklarasi atribut pemain dengan tipe Pemain, dan bersifat private
+    private int lebar = 0; // deklarasi atribut lebar dengan tipe integer, dan bersifat private
+    private int tinggi = 0; // deklarasi atribut tinggi dengan tipe  integer, dan bersifat private
+    private final int jarak = 20; // deklarasi atribut jarak dengan tipe integer, bernilai final dan bersifat private
+    private final String temp = "";// deklarasi atribut temp dengan tipe String,bernilai final dan bersifat private
+    private File Awal; // deklarasi atribut awal dengan tipe File dan bersifat private. 
+    private final ArrayList Allperintah = new ArrayList(); // deklarasi atribut Allperintah mengunakan arraylist
 
     public Peta(File file) {
         this.bacaPeta(file);
@@ -88,7 +87,6 @@ public final class Peta extends JPanel {
         g.fillRect(0, 0, this.getLebar(), this.getTinggi()); // set tinggi
         map.addAll(tembok);
         map.addAll(finish);
-        map.addAll(bola);
         map.add(pemain);
         for (int i = 0; i < map.size(); i++) {
             if (map.get(i) != null) {

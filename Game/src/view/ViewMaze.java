@@ -39,10 +39,9 @@ public class ViewMaze extends javax.swing.JFrame {
         gameMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        helpMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SOKOBAN");
+        setTitle("MAZE");
         setBackground(new java.awt.Color(102, 255, 204));
 
         PixelPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -146,13 +145,14 @@ public class ViewMaze extends javax.swing.JFrame {
             }
         });
 
-        openMenuItem.setText("Open");
+        openMenuItem.setText("Baca");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
             }
         });
         gameMenu.add(openMenuItem);
+        openMenuItem.getAccessibleContext().setAccessibleName("Baca");
 
         exitMenuItem.setText("Exit");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -161,14 +161,6 @@ public class ViewMaze extends javax.swing.JFrame {
             }
         });
         gameMenu.add(exitMenuItem);
-
-        helpMenuItem.setText("Help");
-        helpMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                helpMenuItemActionPerformed(evt);
-            }
-        });
-        gameMenu.add(helpMenuItem);
 
         jMenuBar1.add(gameMenu);
 
@@ -238,19 +230,6 @@ public class ViewMaze extends javax.swing.JFrame {
         perintahText.setText("");
     }//GEN-LAST:event_goButtonActionPerformed
 
-    private void helpMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuItemActionPerformed
-        JOptionPane.showMessageDialog(null, "Petunjuk Permainan : \n"
-                + "1. Terlebih Dahulu Pilih Map pada menu open\n"
-                + "2. Gunakan huruf untuk mengatur gerak pemain\n"
-                + "u = atas\n"
-                + "d = bawah\n"
-                + "l = kiri\n"
-                + "r = kanan\n"
-                + "3. Atur strategi agar tidak terjadi Deadlock\n"
-                + "4. Jika terjadi deadlock klik reset untuk memulai dari awal\n"
-                + "5. Untuk memenangkan permainan arahkan bola ke gawang");
-    }//GEN-LAST:event_helpMenuItemActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -300,7 +279,6 @@ public class ViewMaze extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu gameMenu;
     private javax.swing.JButton goButton;
-    private javax.swing.JMenuItem helpMenuItem;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem openMenuItem;
