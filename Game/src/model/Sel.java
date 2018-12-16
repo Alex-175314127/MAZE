@@ -37,7 +37,7 @@ public class Sel {
         this.warna = warna;
     }
 
-    public Sel(int posisiX, int posisiY, int lebar, int tinggi, char nilai, Color warna) {
+    public  Sel (int posisiX, int posisiY, int lebar, int tinggi, char nilai, Color warna) {
         this.kolom = posisiX;
         this.baris = posisiY;
         this.lebar = lebar;

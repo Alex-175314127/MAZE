@@ -1,6 +1,6 @@
 
 
-package model;
+package view;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import model.Peta;
 
 
 
@@ -59,11 +60,12 @@ public class ViewMaze extends javax.swing.JFrame {
             .addGap(0, 412, Short.MAX_VALUE)
         );
 
-        JPanel.setBackground(new java.awt.Color(153, 153, 255));
+        JPanel.setBackground(new java.awt.Color(216, 154, 135));
         JPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         JPanel.setForeground(new java.awt.Color(255, 255, 255));
         JPanel.setAlignmentX(0.0F);
         JPanel.setAlignmentY(0.0F);
+        JPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         perintahLabel.setText("Perintah");
 
@@ -116,7 +118,7 @@ public class ViewMaze extends javax.swing.JFrame {
                     .addGroup(JPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(RestartButton)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         JPanelLayout.setVerticalGroup(
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +139,7 @@ public class ViewMaze extends javax.swing.JFrame {
 
         jMenuBar1.setName(""); // NOI18N
 
-        gameMenu.setText("Game");
+        gameMenu.setText("MAZE");
         gameMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameMenuActionPerformed(evt);

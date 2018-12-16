@@ -57,7 +57,7 @@ public class Tempat extends JPanel implements ActionListener{
                 hasil = hasil + (char) data;
                 if ((char) data != '\n') {
                     if ((char) data != '\t') {
-                        Sel sel = new Sel(baris, kolom, (char) data);
+                      Sel sel = new Sel(baris, kolom, (char) data);
                         this.tambahSel(sel);
                         kolom++;
                     }
