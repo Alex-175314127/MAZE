@@ -6,9 +6,12 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 
-public class Tembok extends Sel {
+public class Tembok extends Sel {// kelas bawaan dari kelas Sel
     /**
-     * Constructor untuk menambahkan gambar agar tanda # berubah
+     * constructor Tembok Pada saat objek Tembok dibuat, kita memberikan 2 nilai untuk
+     * konstruktor yang nantinya akan digunakan untuk memberi nilai pada
+     * attribut x dan y di class. Kesimpulannya, pada saat objek sel dibuat, objek
+     * tersebut sudah memiliki nilai x dan y.
      * @param x
      * @param y 
      */
