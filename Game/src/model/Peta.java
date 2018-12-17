@@ -25,7 +25,11 @@ public final class Peta extends JPanel {
     private final ArrayList Allperintah = new ArrayList(); // deklarasi atribut Allperintah mengunakan arraylist
 
     /**
-     * method Peta untuk menujukan ke method bacaPeta
+     * 
+     * constructor Peta Pada saat objek peta dibuat, kita memberikan nilai untuk
+     * konstruktor yang nantinya akan digunakan untuk memberi nilai pada
+     * attribut file di class. Kesimpulannya, pada saat objek peta dibuat, objek
+     * tersebut sudah memiliki nilai file.
      *
      * @param file
      */
@@ -34,55 +38,76 @@ public final class Peta extends JPanel {
     }
 
     /**
-     * method ini berfungsi untuk membaca file map untuk di tampilan pada Frame
-     * di game
+     * method bacapeta method ini berfungsi untuk membaca data dari lokasi file
+     * disimpan. method ini memiliki parameter file dengan tipe data File. pada
+     * method ini user mendeklarasikan perintah yang akan digunkan untuk membaca
+     * file.
      *
      * @param file
      */
     public void bacaPeta(File file) {
-
         try {
-            if (file != null) {
-                FileInputStream input = new FileInputStream(file);
-                Awal = file;
-                int x = 0;
-                int y = 0;
-                Tembok tmbk;
+            if (file != null) { //fungsi ini terpanggil apabila file tidak sama kosong, dan dapat dibaca oleh fileinputstream
+                FileInputStream input = new FileInputStream(file); // digunakan untuk membaca secara stream file dari index yang telah disimpan pada file.
+                Awal = file; //deklarasi variabel awal yang memiliki nilai sama dengan atribut file
+                int x = 0; //deklarasi nilai dari variabel x dengan type integer yang bernilai nol
+                int y = 0;//deklarasi nilai dari variabel y dengan type integer yang bernilai nol
 
-                Finish a;
-                int data;
-                while ((data = input.read()) != -1) { // untuk membaca inputan titik koordinat
+                Tembok tmbk; //deklarasi variabel tmbk dengan tipe Tembok yang mana mempunyai hubungan dengan kelas Tembok
+                Finish a; //deklarasi variabel a dengan tipe data Finish yang mana mempunyai hubungan dengan kelas Finish
+                int data; //deklarasi variabel data dengan tipe integer 
+                while ((data = input.read()) != -1) {
+                    //mendeklarasikan perintah untuk membaca inputan titik koordinat dari peta yang ada
+                    //setiap item akan dapat dibaca sejumlah atau sebanyak item yang ada.
                     char item = (char) data;
+                    //mendeklarasikan variabel item dengan tipe char mempunyai nilai yang sama dengan variabel data yang memiliki tipe data char juga
                     switch (item) {
-                        case '\n':
-                            y += jarak;
+                        case '\n': //nilai yang akan dicocokkan dengan isi value.
+                            y += jarak; // mendeklarasikan nilai y yang disimpan pada y+jarak
                             if (this.lebar < x) {
                                 this.lebar = x;
+                                //jika nilai lebar lebih besar  dari x maka nilai dari lebar sama dengan nilai x
                             }
-                            x = 0;
-                            break;
-                        case '#':
+                            x = 0; // nilai x nol
+                            break; //perintah untuk mengakhiri statement. 
+                        //Apabila tidak ada break, komputer akan mengeksekusi intruksi yang berada di bawahnya walaupun berada di case yang berbeda.
+                        case '#': //nilai yang akan dicocokkan dengan isi value.
                             tmbk = new Tembok(x, y);
                             tembok.add(tmbk);
                             x += jarak;
-                            break;
-                        case 'o':
+                            break; //perintah untuk mengakhiri statement. 
+                        //Apabila tidak ada break, komputer akan mengeksekusi intruksi yang berada di bawahnya walaupun berada di case yang berbeda.
+                        case 'o'://nilai yang akan dicocokkan dengan isi value.
                             a = new Finish(x, y);
                             finish.add(a);
                             x += jarak;
-                            break;
-                        case '@':
+                            break; //perintah untuk mengakhiri statement. 
+                        //Apabila tidak ada break, komputer akan mengeksekusi intruksi yang berada di bawahnya walaupun berada di case yang berbeda.
+                        case '@'://nilai yang akan dicocokkan dengan isi value.
                             pemain = new Pemain(x, y);
                             x += jarak;
-                            break;
-                        case '.':
+                            break; //perintah untuk mengakhiri statement. 
+                        //Apabila tidak ada break, komputer akan mengeksekusi intruksi yang berada di bawahnya walaupun berada di case yang berbeda.
+                        case '.'://nilai yang akan dicocokkan dengan isi value.
                             x += jarak;
+                            break; //perintah untuk mengakhiri statement. 
+                        //Apabila tidak ada break, komputer akan mengeksekusi intruksi yang berada di bawahnya walaupun berada di case yang berbeda.
+                        default: //bersifat optional. dieksekusi jika value tidak cocok dengan salah satu constanta yang tersedia.
                             break;
-                        default:
-                            break;
+                        //perintah untuk mengakhiri statement. 
+                        //Apabila tidak ada break, komputer akan mengeksekusi intruksi yang berada di bawahnya walaupun berada di case yang berbeda.
                     }
                     tinggi = y;
 
+                    /**
+                     * Setiap cabang akan dijalankan jika syarat nilai case
+                     * tersebut dipenuhi dan default akan dijalankan jika semua
+                     * cabang diatasnya tidak terpenuh. Pernyataan break
+                     * menunjukan bahwa perintah siap keluar dari switch. Jika
+                     * pernyataan ini tidak ada, maka program akan diteruskan
+                     * kecabang – cabang yang lainnya.
+                     *
+                     */
                 }
             }
 
@@ -92,8 +117,9 @@ public final class Peta extends JPanel {
     }
 
     /**
-     * method ini berfungsi untuk menampilkan gambar pada sel di frame game dan
-     * mengatur gambar sesuai konfigurasi di file map
+     * method ini berfungsi untuk meletakkan proses penggambaran pada method
+     * paintComponent (melakukan override). Method ini akan dipanggil secara
+     * otomatis ketika sebuah frame (window) menjadi visible atau di-resize.
      *
      * @param g
      */
@@ -119,8 +145,8 @@ public final class Peta extends JPanel {
      *
      * @return
      */
-    public int getLebar() {
-        return lebar;
+    public int getLebar() {// method getLebar
+        return lebar;// mengembalikan nilai dari variabel lebar yang mana merupakan variabel local 
     }
 
     /**
@@ -128,13 +154,17 @@ public final class Peta extends JPanel {
      *
      * @return
      */
-    public int getTinggi() {
-        return tinggi;
+    public int getTinggi() {// method getTinggi
+        return tinggi;// mengembalikan nilai dari variabel tinggi yang mana merupakan variabel local
     }
 
     /**
-     * method ini berfungsi untuk mengatur pergerakan pemain sesuai perintah
-     * yang di inputkan
+     *  method gerakpemain berfungsi untuk menampung perintah yang akan
+         * digunakan untuk menggerapkan player sesuai dengan perintah yang
+         * diinput user. perintah-perintah tersebut akan ditentukan seperti udlr
+         * u = up (perintah untuk gerak keatas) l =left ( perintah untuk gerak
+         * ke kiri) d = down (perintah untuk gerak kekbawah) r= right (perintah
+         * untuk gerak ke kanan)
      *
      * @param input
      */
@@ -147,12 +177,25 @@ public final class Peta extends JPanel {
             if (in[0].matches("[udrlz]")) {
                 Allperintah.add(input);
                 if (in[0].equalsIgnoreCase("u")) {
+                     /**
+                     * jika perintah pada index nol adalah u ,maka objek string
+                     * yang bersangkutan akan dibandingkan dengan objek string,
+                     * pada parameter fungsi ini, dengan tanpa memperdulikan
+                     * perbedaan antara huruf besar dengan huruf kecil.
+                     */
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
+                        /*
+                        * kita dapat menggunakan static method valueOf() atau ParseInt()
+                        * untuk konversi dari angka ke String dapat gunakan static method
+                        * valueOf() milik String
+                         */
                         if (pemainTembok(pemain, "u")) {
+                            // jika pemain adalah u, maka akan mengembalikan nilainya ,
+                            //kemudian pemaindapat bergerak sesuai dengan perintah u uang diinput
                             return;
                         } else {
-                            pemain.Gerak(0, -jarak);
-                            repaint();
+                            pemain.Gerak(0, -jarak);// memanggil method gerak milik pemain
+                            repaint();// memangil method repaint untuk menggambar ulang panel
                             //buat loopin untuk menggerakan player sebanyak yang di inputkan
                         }
                     }
@@ -162,52 +205,105 @@ public final class Peta extends JPanel {
                      * dapat bergerak
                      */
                 } else if (in[0].equalsIgnoreCase("d")) {
+                    /**
+                     * jika perintah pada index nol adalah d ,maka objek string
+                     * yang bersangkutan akan dibandingkan dengan objek string,
+                     * pada parameter fungsi ini, dengan tanpa memperdulikan
+                     * perbedaan antara huruf besar dengan huruf kecil.
+                     */
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
+                         /*
+                        * kita dapat menggunakan static method valueOf() atau ParseInt()
+                        * untuk konversi dari angka ke String dapat gunakan static method
+                        * valueOf() milik String
+                         */
+
                         if (pemainTembok(pemain, "d")) {
+                            // jika pemain adalah u, maka akan mengembalikan nilainya ,
+                            //kemudian pemaindapat bergerak sesuai dengan perintah d yang diinput
                             return;
                         } else {
-                            pemain.Gerak(0, jarak);
-                            repaint();
+                            pemain.Gerak(0, jarak);// memanggil method gerak milik pemain
+                            repaint();// memangil method repaint untuk menggambar ulang panel
                         }
 
                     }
                     isCompleted();
                 } else if (in[0].equalsIgnoreCase("r")) {
+                    /**
+                     * jika perintah pada index nol adalah r ,maka objek string
+                     * yang bersangkutan akan dibandingkan dengan objek string,
+                     * pada parameter fungsi ini, dengan tanpa memperdulikan
+                     * perbedaan antara huruf besar dengan huruf kecil.
+                     */
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
+                         /*
+                        * kita dapat menggunakan static method valueOf() atau ParseInt()
+                        * untuk konversi dari angka ke String dapat gunakan static method
+                        * valueOf() milik String
+                         */
                         if (pemainTembok(pemain, "r")) {
+                            // jika pemain adalah r, maka akan mengembalikan nilainya ,
+                            //kemudian pemain dapat bergerak sesuai dengan perintah r yang diinput
                             return;
 
                         } else {
-                            pemain.Gerak(jarak, 0);
-                            repaint();
+                            pemain.Gerak(jarak, 0);// memanggil method gerak milik pemain
+                            repaint();// memangil method repaint untuk menggambar ulang panel
                         }
                     }
                     isCompleted();
                 } else if (in[0].equalsIgnoreCase("l")) {
+                     /**
+                     * jika perintah pada index nol adalah l ,maka objek string
+                     * yang bersangkutan akan dibandingkan dengan objek string,
+                     * pada parameter fungsi ini, dengan tanpa memperdulikan
+                     * perbedaan antara huruf besar dengan huruf kecil.
+                     */
                     for (int i = 0; i < Integer.parseInt(String.valueOf(in[1])); i++) {
+                        /*
+                        * kita dapat menggunakan static method valueOf() atau ParseInt()
+                        * untuk konversi dari angka ke String dapat gunakan static method
+                        * valueOf() milik String
+                         */
                         if (pemainTembok(pemain, "l")) {
+                            // jika pemain adalah l, maka akan mengembalikan nilainya ,
+                            //kemudian pemain dapat bergerak sesuai dengan perintah r yang diinput
                             return;
                         } else {
-                            pemain.Gerak(-jarak, 0);
-                            repaint();
+                            pemain.Gerak(-jarak, 0);// memanggil method gerak milik pemain
+                            repaint();// memangil method repaint untuk menggambar ulang panel
                         }
 
                     }
                     isCompleted();
                 } else if (in[0].equalsIgnoreCase("z")) {
-
+/**
+                     * jika perintah pada index nol adalah z ,maka objek string
+                     * yang bersangkutan akan dibandingkan dengan objek string,
+                     * pada parameter fungsi ini, dengan tanpa memperdulikan
+                     * perbedaan antara huruf besar dengan huruf kecil.
+                     */
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Perintah tidak Dikenal");
+                 /**
+                     * menampilkan pesan ketika salah memasukan perintah
+                     */             
             }
         } else {
             JOptionPane.showMessageDialog(null, "Perintah Gagal");
+            /**
+                     * menampilkan pesan ketika gagal memasukan perintah
+                     */
         }
     }
 
     /**
-     * berfungsi untuk memenentukan posisi tembok agar pemain tidak dpat
-     * melewati tembok dan membuat player tidak bergerak jika ada tembok
+     * * method ini berfungsi untuk mengecek posisi tembok
+          * dengan perintah yang diinput 
+          * apabila saat perintah dijalankan maka player
+          * akan berhenti dengan perintah break.
      *
      * @param pemain
      * @param input
